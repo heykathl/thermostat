@@ -42,5 +42,31 @@ describe('thermostat', () => {
     };
     expect(thermostat.getTemperature()).toBe(32)
   });
+
+  test('resets the temperature to 20', () => {
+    thermostat.up();
+    thermostat.reset();
+    expect(thermostat.getTemperature()).toBe(20);
+  });
+  
+  test('it returns medium-usage', () => {
+    expect(thermostat.getEnergyUsage()).toBe('medium-usage');
+  });
+
+  test('it returns low-usage', () => {
+    for (let i = 0; i < 10; i++) {
+      thermostat.down();
+    }
+    expect(thermostat.getEnergyUsage()).toBe('low-usage');
+  });
+
+  test('it returns high-usage', () => {
+    thermostat.setPowerSavingMode(false)
+    for (let i = 0; i < 10; i++) {
+      thermostat.up();
+    }
+    expect(thermostat.getEnergyUsage()).toBe('high-usage');
+  });
+
 });
 
