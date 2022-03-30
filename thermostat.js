@@ -4,6 +4,10 @@ class Thermostat {
     this.powerSavingMode = true;
   };
 
+  getPowerSavingStatus() {
+    return this.powerSavingMode
+  }
+
   getTemperature() {
     return this.temperature;
   };
@@ -41,7 +45,4 @@ class Thermostat {
   }
 };
 
-
-module.exports = {
-  Thermostat
-}
+module.exports = Thermostat;

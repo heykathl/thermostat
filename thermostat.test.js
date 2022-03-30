@@ -67,6 +67,5 @@ describe('thermostat', () => {
     }
     expect(thermostat.getEnergyUsage()).toBe('high-usage');
   });
-
 });
 
