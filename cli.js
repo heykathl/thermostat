@@ -1,13 +1,15 @@
-const Thermostat = require('./thermostat')
+import Thermostat from './thermostat.js';
+import WeatherApi from './weather.js';
+import { createInterface } from 'readline';
 
-const readline = require('readline');
-const { get } = require('http');
-const rl = readline.createInterface({
+const rl = createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-const thermostat = new Thermostat
+const weather = new WeatherApi;
+const thermostat = new Thermostat(weather);
+
 
 const logTemperature = () => {
   if (thermostat.getTemperature() >= 25 && thermostat.getPowerSavingStatus() === true){ 

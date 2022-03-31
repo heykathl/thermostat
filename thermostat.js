@@ -1,7 +1,10 @@
-class Thermostat {
-  constructor() {
+import WeatherApi from "./weather.js";
+
+export default class Thermostat {
+  constructor(weather) {
     this.temperature = 20;
     this.powerSavingMode = true;
+    this.weather = weather;
   };
 
   getPowerSavingStatus() {
@@ -43,6 +46,16 @@ class Thermostat {
       return 'high-usage';
     }
   }
+
+  setCity(city) {
+    this.weather.fetchWeatherData(city, (response) => {
+      this.temperature = response.main.temp
+    });
+  };
 };
 
-module.exports = Thermostat;
+// const weather = new WeatherApi();
+// const thermo = new Thermostat(weather);
+// thermo.setCity("Melbourne");
+// // console.log(thermo.getTemperature());
+

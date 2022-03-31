@@ -1,10 +1,21 @@
-const classes = require('./thermostat')
+// import { jest } from "@jest/globals";
+
+// jest.mock('./weather.js', () => ({
+//   fetchWeatherData(city, callback){
+//     callback({main:{ temp: 27 }});
+//   }
+// }));
+
+import Thermostat from './thermostat.js';
+import WeatherApi from './weather.js';
 
 describe('thermostat', () => {
   let thermostat;
+  let weather;
 
   beforeEach(() => {
-    thermostat = new classes.Thermostat();
+    weather = new WeatherApi()
+    thermostat = new Thermostat(weather);
   });
 
   test('starts with initial temperature of 20 degrees', () => {
@@ -67,5 +78,11 @@ describe('thermostat', () => {
     }
     expect(thermostat.getEnergyUsage()).toBe('high-usage');
   });
+
+  test('sets temperature to the city given', async () => {
+    await thermostat.setCity('Melbourne');
+    expect(thermostat.getTemperature()).toBe(27);
+  });
+
 });
 
